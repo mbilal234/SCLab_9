@@ -1,17 +1,19 @@
+
 /* Copyright (c) 2015-2016 MIT 6.005 course staff, all rights reserved.
  * Redistribution of original or derived work requires permission of course staff.
  */
 package poet;
 
+
+
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.Files;
+import java.util.*;
 
 public class GraphPoet {
 
-    private final Graph<String> graph = Graph.empty();
+    private final ConcreteGraph<String> graph = ConcreteGraph.empty();
 
     // Abstraction function:
     //   Represents a poet with a word affinity graph derived from a corpus.
@@ -27,8 +29,8 @@ public class GraphPoet {
      * @throws IOException if the corpus file cannot be found or read
      */
     public GraphPoet(File corpus) throws IOException {
-        List<String> words = FileUtils.readWords(corpus);
-        buildGraph(words);
+        Scanner words = new Scanner(corpus).useDelimiter(" ");
+        buildGraph(words.tokens().toList());
     }
 
     // Check representation invariant
@@ -41,7 +43,7 @@ public class GraphPoet {
         String prevWord = null;
         for (String word : words) {
             word = word.toLowerCase();
-            graph.addVertex(word);
+            graph.add(word);
             if (prevWord != null) {
                 graph.addEdge(prevWord, word);
             }
@@ -64,7 +66,7 @@ public class GraphPoet {
             String word1 = inputWords[i].toLowerCase();
             String word2 = inputWords[i + 1].toLowerCase();
 
-            List<String> bridgeWords = findBridgeWords(word1, word2);
+            Set<String> bridgeWords =  findBridgeWords(word1, word2);
             if (!bridgeWords.isEmpty()) {
                 String bridgeWord = chooseMaxWeightBridge(bridgeWords, word1, word2);
                 poemBuilder.append(inputWords[i]).append(" ").append(bridgeWord).append(" ");
@@ -78,12 +80,12 @@ public class GraphPoet {
     }
 
     // Find bridge words between two words
-    private List<String> findBridgeWords(String word1, String word2) {
+    private Set<String> findBridgeWords(String word1, String word2) {
         return graph.getSuccessors(word1);
     }
 
     // Choose the bridge word with the maximum weight
-    private String chooseMaxWeightBridge(List<String> bridgeWords, String word1, String word2) {
+    private String chooseMaxWeightBridge(Set<String> bridgeWords, String word1, String word2) {
         Map<String, Integer> weights = new HashMap<>();
         for (String bridgeWord : bridgeWords) {
             weights.put(bridgeWord, graph.getWeight(word1, bridgeWord) + graph.getWeight(bridgeWord, word2));
@@ -103,4 +105,6 @@ public class GraphPoet {
                 '}';
     }
 }
+
+
 
