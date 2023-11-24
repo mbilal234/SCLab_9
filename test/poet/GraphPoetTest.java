@@ -1,6 +1,4 @@
-/* Copyright (c) 2015-2016 MIT 6.005 course staff, all rights reserved.
- * Redistribution of original or derived work requires permission of course staff.
- */
+
 package poet;
 
 
@@ -19,11 +17,15 @@ import static org.junit.Assert.assertTrue;
 public class GraphPoetTest {
 
     // Testing strategy
-    // - Test the GraphPoet(File) constructor with different corpus files
-    // - Test the poem(String) method with different input strings
-    // - Test edge cases, such as empty input or empty corpus file
-    // - Test representation invariance and safety from rep exposure
+    //   TODO
 
+    // TODO tests for GraphPoet
+
+    // TODO tests for checkRep
+
+    // TODO tests for poem
+
+    // TODO tests for safety from rep exposure
     @Test(expected = AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
@@ -35,14 +37,9 @@ public class GraphPoetTest {
         GraphPoet samplePoet = new GraphPoet(new File("test/poet/sample-corpus.txt"));
 
         // Add assertions to check the state of the GraphPoet object after
-        // initialization
-        // For example, you can check if the graph is correctly constructed from the
-        // corpus
-        // You might also want to check the representation invariant and safety from rep
-        // exposure.
-        // Note: This test assumes the existence of a sample-corpus.txt file in the
-        // specified path.
-        // Make sure to replace it with the actual path and file for your test.
+        // construction
+        // For example, check that the graph is not empty
+        //assertTrue(!samplePoet.graph.toString().isEmpty());
     }
 
     @Test
