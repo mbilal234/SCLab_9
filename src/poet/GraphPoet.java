@@ -8,7 +8,7 @@ package poet;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+
 import java.util.*;
 
 public class GraphPoet {
@@ -38,7 +38,11 @@ public class GraphPoet {
         // No specific representation invariant to check for now
     }
 
-    // Build the word affinity graph from the given list of words
+    /**
+     * Build the word affinity graph from the given list of words.
+     *
+     * @param words the list of words to build the graph from
+     */ // Build the word affinity graph from the given list of words
     private void buildGraph(List<String> words) {
         String prevWord = null;
         for (String word : words) {
@@ -79,12 +83,25 @@ public class GraphPoet {
         return poemBuilder.toString().trim();
     }
 
-    // Find bridge words between two words
+    /**
+     * Find bridge words between two given words.
+     *
+     * @param word1 the first word
+     * @param word2 the second word
+     * @return a set of bridge words between word1 and word2
+     */ // Find bridge words between two words
     private Set<String> findBridgeWords(String word1, String word2) {
         return graph.getSuccessors(word1);
     }
 
-    // Choose the bridge word with the maximum weight
+    /**
+     * Choose the bridge word with the maximum weight.
+     *
+     * @param bridgeWords a set of bridge words between the given word1 and word2
+     * @param word1 the first word
+     * @param word2 the second word
+     * @return the bridge word with the maximum weight, or an empty string if no bridge word is found
+     */ // Choose the bridge word with the maximum weight
     private String chooseMaxWeightBridge(Set<String> bridgeWords, String word1, String word2) {
         Map<String, Integer> weights = new HashMap<>();
         for (String bridgeWord : bridgeWords) {
