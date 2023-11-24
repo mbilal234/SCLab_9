@@ -11,15 +11,18 @@ import org.junit.Test;
  * Tests for GraphPoet.
  */
 public class GraphPoetTest {
-    
+
     // Testing strategy
-    //   TODO
-    
-    @Test(expected=AssertionError.class)
+    // - Test the GraphPoet(File) constructor with different corpus files
+    // - Test the poem(String) method with different input strings
+    // - Test edge cases, such as empty input or empty corpus file
+    // - Test representation invariance and safety from rep exposure
+
+    @Test(expected = AssertionError.class)
     public void testAssertionsEnabled() {
         assert false; // make sure assertions are enabled with VM argument: -ea
     }
-    
+
     // TODO tests
-    
+
 }
