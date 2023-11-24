@@ -64,6 +64,7 @@ public class GraphPoet {
      */
     public String poem(String input) {
         String[] inputWords = input.split("\\s+");
+
         StringBuilder poemBuilder = new StringBuilder();
 
         for (int i = 0; i < inputWords.length - 1; i++) {
@@ -77,6 +78,7 @@ public class GraphPoet {
             } else {
                 poemBuilder.append(inputWords[i]).append(" ");
             }
+
         }
 
         poemBuilder.append(inputWords[inputWords.length - 1]);  // Append the last word
